@@ -11,6 +11,10 @@ use Auth;
 
 class DashboardController extends Controller
 {
+	/**
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
     public function index(){
         if(Auth::user()->isRol("admin"))
         {

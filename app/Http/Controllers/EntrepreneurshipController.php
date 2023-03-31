@@ -22,7 +22,10 @@ class EntrepreneurshipController extends Controller
         $this->middleware(['auth']);
     }
 
-    
+	/**
+	 *
+	 * @return \Illuminate\Http\Response
+	 */        
     public function create()
     {
         $entrepreneurship = new Entrepreneurship;
@@ -35,6 +38,11 @@ class EntrepreneurshipController extends Controller
                 ->with("entrepreneurship", $entrepreneurship);
     }
   
+	/**
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @return \Illuminate\Http\Response
+	 */    
     public function store(Request $request)
     {
         //dd($request->all());
@@ -62,6 +70,11 @@ class EntrepreneurshipController extends Controller
         return redirect()->route('communes.index')->with('message', 'Comuna Agregada con éxito.');
     }
     
+	/**
+	 *
+	 * @param  \App\Models\Entrepreneurship  $entrepreneurship
+	 * @return \Illuminate\Http\Response
+	 */    
     public function previous(Entrepreneurship $entrepreneurship)
     {
         $entrepreneurship->item;
@@ -74,6 +87,11 @@ class EntrepreneurshipController extends Controller
                 ->with("documentFiles", $documentFiles);
     }
 
+	/**
+	 *
+	 * @param  \App\Models\Entrepreneurship  $entrepreneurship
+	 * @return \Illuminate\Http\Response
+	 */    
     public function edit(Entrepreneurship $entrepreneurship)
     {
         if(!Auth::user()->isRol("admin"))
@@ -92,9 +110,14 @@ class EntrepreneurshipController extends Controller
                 ->with("items", $items)
                 ->with("entrepreneurship", $entrepreneurship)
                 ->with("documentFiles", $documentFiles);
-    }
+    }    
     
-    
+	/**
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @param  \App\Models\Entrepreneurship  $entrepreneurship
+	 * @return \Illuminate\Http\Response
+	 */    
     public function update(Request $request, Entrepreneurship $entrepreneurship)
     {        
         if(!Auth::user()->isRol("admin"))

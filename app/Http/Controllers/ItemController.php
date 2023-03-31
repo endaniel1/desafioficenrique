@@ -18,7 +18,11 @@ class ItemController extends Controller
     {
         $this->middleware(['auth', 'role:admin']);
     }
-    
+        
+	/**
+	 *
+	 * @return \Illuminate\Http\Response
+	 */    
     public function index()
     {
         $items = Item::all();
@@ -26,6 +30,10 @@ class ItemController extends Controller
         return view('admin.items.index')->with('items', $items);
     }
     
+	/**
+	 *
+	 * @return \Illuminate\Http\Response
+	 */  
     public function create()
     {
         $item = new Item;
@@ -34,6 +42,11 @@ class ItemController extends Controller
                 ->with("item", $item);
     }
   
+	/**
+	 *
+	 * @param  \Illuminate\Http\Requests\Items\AdminCreateItemRequest  $request
+	 * @return \Illuminate\Http\Response
+	 */    
     public function store(AdminCreateItemRequest $request)
     {
         //dd($request->all());
@@ -46,13 +59,23 @@ class ItemController extends Controller
         return redirect()->route('items.index')->with('message', 'Rubro Agregado con éxito.');
     }
     
+	/**
+	 *
+	 * @param  \App\Models\Item  $item
+	 * @return \Illuminate\Http\Response
+	 */    
     public function edit(Item $item)
     {
         return view("admin.items.edit")
                 ->with("item", $item);
-    }
+    }    
     
-    
+	/**
+	 *
+	 * @param  \Illuminate\Http\Requests\Items\AdminUpdateItemRequest  $request
+	 * @param  \App\Models\Item  $item
+	 * @return \Illuminate\Http\Response
+	 */    
     public function update(AdminUpdateItemRequest $request, Item $item)
     {
         //dd($request->all());
@@ -66,6 +89,11 @@ class ItemController extends Controller
         return redirect()->route('items.index')->with('message', 'Rubro Actualizado con éxito.');
     }
 
+	/**
+	 *
+	 * @param  \App\Models\Item  $item
+	 * @return \Illuminate\Http\Response
+	 */    
     public function delete(Item $item)
     {
         //dd("esta apueno de elimnar");
